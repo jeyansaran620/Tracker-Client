@@ -23,6 +23,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "deploy" : "yarn install && yarn build",
     "start": "react-scripts start",
     "lint": "eslint .",
     "build": "react-scripts build",
