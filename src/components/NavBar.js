@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 import auth from "./auth";
 import propTypes from 'prop-types';
+import {hostname} from '../hostname';
 
 class NavBar extends React.Component{
   
@@ -47,9 +48,25 @@ class NavBar extends React.Component{
    
     logout()
     {
-        auth.logout(() => {
-            this.props.history.push("/Login");
-          });
+        const headers = {
+            method:'GET', 
+            credentials: 'include',
+            headers: {'Authorization': 'Basic ' + btoa(`${this.state.username}:${this.state.password}`)}};
+
+        fetch( `${hostname}login`, headers)
+        .then(response => response.json())
+        .then(json => 
+            {
+                if(json.logout)
+                {
+                    auth.logout(() => {
+                        this.props.history.push("/Login");
+                    });
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     toggleNav() {
