@@ -50,10 +50,10 @@ class NavBar extends React.Component{
     {
         const headers = {
             method:'GET', 
-            credentials: 'include',
-            headers: {'Authorization': 'Basic ' + btoa(`${this.state.username}:${this.state.password}`)}};
+            credentials: 'include'
+        }
 
-        fetch( `${hostname}login`, headers)
+        fetch( `${hostname}logout`, headers)
         .then(response => response.json())
         .then(json => 
             {
